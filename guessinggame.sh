@@ -1,9 +1,14 @@
 #!/bin/bash
 # guessinggame.sh
 
-# Function guessinggame
+# Count the actual number of files
+filecount=$(ls -1 | wc -l)
+
+# Function to run the guessing game
 function guessinggame {
-    # Loop until the guess is correct
+    echo "Can you guess how many files are in the current directory?"
+    read response
+
     while [ "$response" -ne "$filecount" ]; do
         if [ "$response" -lt "$filecount" ]; then
             echo "Too low! Try again:"
@@ -12,15 +17,9 @@ function guessinggame {
         fi
         read response
     done
+
+    echo "Correct! Well done — there are exactly $filecount files. Game over."
 }
 
-echo "Can you guess how many files are in the current directory?"
-read response
-
-# Count the actual number of files
-filecount=$(ls | wc -l)
-
-# Call the function with the user's input
-guessinggame "$response"
-
-echo "Correct! There are $filecount files."
+# Run the game
+guessinggame
